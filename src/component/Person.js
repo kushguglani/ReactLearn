@@ -8,6 +8,13 @@ const person = (props)=>{
             width:'450px'
         }
     };
+    
+    const rndm = Math.random();
+    console.log(rndm);
+    console.log("kush");
+    if(rndm>0.5){
+        throw new Error("Something went wrong");
+    }
     return(
         <div className="Person" style= {style}>
             <p onClick={props.click}> Hello my name is {props.name} and my age is {props.age}</p>
