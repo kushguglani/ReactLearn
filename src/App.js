@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, {StyleRoot} from 'radium';
 
 import Person from './component/Person.js'
 import './App.css';
@@ -9,10 +10,7 @@ class App extends Component {
 		persons:[
 			{id:"as1", name:"krishna",age:undefined},
 			{id:"as2", name:"kush",age:25,hobbies:"chanting"},
-			{id:"as3", name:"kush1",age:25,hobbies:"chanting"},
-			{id:"as4", name:"kush2",age:25,hobbies:"chanting"},
-			{id:"as5", name:"kush3",age:25,hobbies:"chanting"},
-			{id:"as6", name:"kush4",age:25,hobbies:"chanting"}
+			{id:"as3", name:"kush1",age:25,hobbies:"chanting"}
 		],
 		showPersons:false
 	}
@@ -54,13 +52,18 @@ class App extends Component {
 
 	render() {
 		const style = {
-			backgroundColor:"white",
-			border:"1px solid #f39c12",
+			backgroundColor:"#59ed5f",
+			color:"white",
+			border:"2px solid #f39c12",
 			boxShadow: "0 1px 1px #eee", 
 			cursor:"pointer",
 			borderRadius:"200px",
 			padding:"20px",
-			outline:"none"
+			outline:"none",
+			":hover":{
+				backgroundColor:"#6afe6f",
+				color:'black'
+			}
 		}
 		let person = null;
 		if(this.state.showPersons){
@@ -76,23 +79,43 @@ class App extends Component {
 					})}
 				</div>
 			);
+			style.backgroundColor="#fd4e4e";
+			style[':hover']={
+				backgroundColor:'red',
+				color:'black'
+			}
+		}
+		const classes = [];
+		if(this.state.persons.length<3){
+			classes.push('red')
+		}
+		if(this.state.persons.length<2){
+			classes.push('bold')
+		}
+		if(this.state.persons.length < 1 || !this.state.showPersons){
+			classes.push('noDisplay')
+		}else{
+			classes.pop('noDisplay');
 		}
 		return (
-		 <div className="App">
-			<h1>Hello World!</h1>
-			<button style={style} onClick={this.togglePerson}>Toggle Person</button>
-			{/* { this.state.showPersons?
-			<div>
-				<Person nameChange={this.nameChangeHandler}  click={this.changeSateDataHAndler.bind(this,'Kanha')} name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-				<Person nameChange={this.nameChangeHandler} click={()=> this.changeSateDataHAndler('bhakt')} name={this.state.persons[1].name} age={this.state.persons[1].age} hobbies={this.state.persons[1].hobbies}>My hobbies are :</Person>
-			</div>
-			:null
-			} */}
-			{person}
-		 </div>
+			<StyleRoot>	
+				<div className="App">
+					<h1>Hello World!</h1>
+					<p className={classes.join(' ')}> list of persons</p>
+					<button style={style} onClick={this.togglePerson}>Toggle Person</button>
+					{/* { this.state.showPersons?
+					<div>
+						<Person nameChange={this.nameChangeHandler}  click={this.changeSateDataHAndler.bind(this,'Kanha')} name={this.state.persons[0].name} age={this.state.persons[0].age}/>
+						<Person nameChange={this.nameChangeHandler} click={()=> this.changeSateDataHAndler('bhakt')} name={this.state.persons[1].name} age={this.state.persons[1].age} hobbies={this.state.persons[1].hobbies}>My hobbies are :</Person>
+					</div>
+					:null
+					} */}
+					{person}
+				</div>
+			</StyleRoot>
 		);
 		// return(React.createElement('div',{className:'App'},React.createElement('H1','','Hello World!')));
 	}
 }
 
-export default App;
+export default Radium(App);
