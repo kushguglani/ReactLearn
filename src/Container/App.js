@@ -6,14 +6,25 @@ import CockPit from '../components/CockPit/CockPit';
 import './App.css';
 
 class App extends Component {
-	
-	state={
-		persons:[
-			{id:"as1", name:"krishna",age:undefined},
-			{id:"as2", name:"kush",age:25,hobbies:"chanting"},
-			{id:"as3", name:"kush1",age:25,hobbies:"chanting"}
-		],
-		showPersons:false
+	constructor(props){
+		super(props);
+		this.state={
+			persons:[
+				{id:"as1", name:"krishna",age:undefined},
+				{id:"as2", name:"kush",age:25,hobbies:"chanting"},
+				{id:"as3", name:"kush1",age:25,hobbies:"chanting"}
+			],
+			showPersons:false
+		}
+		console.log("App : ");
+		console.log(props);
+	}
+
+	componentWillMount(){
+		console.log("App : will Mount");
+	}
+	componentDidMount(){
+		console.log("App : did Mount");
 	}
 
 	changeSateDataHAndler=(personName)=>{
@@ -53,6 +64,7 @@ class App extends Component {
 	
 
 	render() {
+		console.log("App : render")
 		let person = null;
 		if(this.state.showPersons){
 			person=(
@@ -67,6 +79,7 @@ class App extends Component {
 			<StyleRoot>	
 				<div className="App">
 				<CockPit 
+					title={this.props.title}
 					persons={this.state.persons}
 					showPersons={this.state.showPersons}	
 					click={this.togglePerson}/>
