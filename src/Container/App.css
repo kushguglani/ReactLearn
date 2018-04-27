@@ -8,5 +8,5 @@
   font-weight: bold;
 }
 .noDisplay{
-  display: none;
+  visibility: hidden;
 }
