@@ -12,7 +12,18 @@ class Persons extends Component{
 	}
 	componentDidMount(){
 		console.log("Persons : did Mount");
-	}
+    }
+    componentWillReceiveProps(nextProps){
+        console.log("Update Persons Will:",nextProps);
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        
+        console.log("Update Persons should :",nextProps,nextState);
+        return true;
+    }
+    componentDidUpdate(){
+        console.log("Update Persons did ");
+    }
     render(){
 		console.log("Persons : render");
         return(
